@@ -18,11 +18,11 @@ script: tox
 # following command to finish PyPI deployment setup:
 # $ travis encrypt --add deploy.password
 deploy:
-  provider: pypi
+  provider: testpypi
   distributions: sdist bdist_wheel
   user: fieryjoy
   password:
-    secure: PLEASE_REPLACE_ME
+    secure: 3pjK48ZtdHDwrTs
   on:
     tags: true
     repo: fieryjoy/monitor
