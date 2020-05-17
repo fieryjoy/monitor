@@ -32,16 +32,14 @@ def main():
                         default=False, help="Run Kafka producer example")
     args = parser.parse_args()
     validate_args(args)
-
-    if args.producer:
-        kwargs = {
-            k: v for k, v in vars(args).items() if k not in ("producer", "consumer", "db_uri")
+    kwargs = {
+            k: v for k, v in vars(args).items() if k not in ("producer", "consumer")
         }
+    if args.producer:
+        del kwargs['db_uri']
         producer_example(**kwargs)
     elif args.consumer:
-        kwargs = {
-            k: v for k, v in vars(args).items() if k not in ("producer", "consumer", "checked_url")
-        }
+        del kwargs['checked_url']
         consumer_example(**kwargs)
 
 
