@@ -38,10 +38,14 @@ def create_table(db_uri):
 
 def insert_values(db_uri, values):
     """ insert values in the stats table"""
+    values = [
+        (value['status_code'], value['reason'], value['response_time'])
+        for value in values]
+
     value_records = ", ".join(["%s"] * len(values))
     keys = "(status_code, reason, response_time)"
     insert_query = (
-        f"INSERT INTO stats {keys} VALUES {value_records}"
+        "INSERT INTO stats {} VALUES {}".format(keys, value_records)
     )
 
     conn = None

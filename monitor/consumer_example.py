@@ -31,10 +31,7 @@ def consumer_example(service_uri, ca_path, cert_path, key_path, db_uri):
         for msg in msgs:
             value = msg.value
             print("Received: {}".format(value))
-            values.append((
-                value['status_code'],
-                value['reason'],
-                value['response_time']))
+            values.append(value)
 
     if values:
         insert_values(db_uri, values)
