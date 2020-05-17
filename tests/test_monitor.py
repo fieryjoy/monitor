@@ -21,15 +21,17 @@ def mocked_requests_get(*args, **kwargs):
         def json(self):
             return self.json_data
 
+    delta = datetime.timedelta(0, 0, 97321)
     if args[0] == 'http://someurl.com':
-        return MockResponse("OK", 200, datetime.timedelta(0, 0, 97321))
+        return MockResponse("OK", 200, delta)
     elif args[0] == 'http://someotherurl.com':
-        return MockResponse("Bad Request", 400, datetime.timedelta(0, 0, 97321))
+        return MockResponse("Bad Request", 400, delta)
 
     return MockResponse(None, 404)
 
+
 class TestMonitor(unittest.TestCase):
-    """Tests for `monitor` package."""
+    """Tests for monitor package."""
 
     def setUp(self):
         """Set up test fixtures, if any."""
@@ -46,7 +48,7 @@ class TestMonitor(unittest.TestCase):
         """Test producer."""
         with self.assertRaises(TypeError):
             producer_example.producer_example()
-    
+
     @mock.patch('requests.get', side_effect=mocked_requests_get)
     def test_002_site_checker(self, mock_get):
         """Test site checker."""
@@ -57,4 +59,3 @@ class TestMonitor(unittest.TestCase):
         result = producer_example.get_result('http://someotherurl.com')
         self.assertEqual(result['status_code'], 400)
         self.assertEqual(result['reason'], 'Bad Request')
-        
