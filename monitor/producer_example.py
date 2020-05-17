@@ -1,9 +1,10 @@
 from kafka import KafkaProducer
 import json
 import requests
+import time
 
 
-def get_result(url="http://google.com"):
+def get_result(url):
     response = requests.get(url)
 
     return {
@@ -13,7 +14,7 @@ def get_result(url="http://google.com"):
         }
 
 
-def producer_example(service_uri, ca_path, cert_path, key_path):
+def producer_example(service_uri, ca_path, cert_path, key_path, checked_url):
     producer = KafkaProducer(
         bootstrap_servers=service_uri,
         security_protocol="SSL",
@@ -23,9 +24,11 @@ def producer_example(service_uri, ca_path, cert_path, key_path):
         value_serializer=lambda v: json.dumps(v).encode('utf-8')
     )
 
-    result = get_result()
-    print("Sending: {}".format(result))
-    producer.send("python_example_topic", result)
+    while True:
+        result = get_result(checked_url)
+        print("Sending: {}".format(result))
+        producer.send("python_example_topic", result)
 
-    # Wait for all messages to be sent
-    producer.flush()
+        # Wait for all messages to be sent
+        producer.flush()
+        time.sleep(5)

@@ -1,8 +1,10 @@
 from kafka import KafkaConsumer
 import json
 
+from monitor.database import connect
 
-def consumer_example(service_uri, ca_path, cert_path, key_path):
+
+def consumer_example(service_uri, ca_path, cert_path, key_path, db_uri):
     consumer = KafkaConsumer(
         'python_example_topic',
         bootstrap_servers=service_uri,
@@ -25,5 +27,6 @@ def consumer_example(service_uri, ca_path, cert_path, key_path):
             for msg in msgs:
                 print("Received: {}".format(msg.value))
 
+    connect(db_uri)
     # Commit offsets so we won't get the same messages again
     consumer.commit()

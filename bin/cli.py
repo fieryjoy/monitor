@@ -10,8 +10,10 @@ from monitor.producer_example import producer_example
 
 def main():
     parser = argparse.ArgumentParser()
+    parser.add_argument('--checked-url',
+                        help="Monitored url")
     parser.add_argument('--service-uri',
-                        help="Service URI in the form host:port",
+                        help="Kafka URI in the form host:port",
                         required=True)
     parser.add_argument('--ca-path',
                         help="Path to project CA certificate",
@@ -22,6 +24,8 @@ def main():
     parser.add_argument('--cert-path',
                         help="Path to the Kafka Certificate Key",
                         required=True)
+    parser.add_argument('--db-uri',
+                        help="PostgreSQL URI in the form host:port")                    
     parser.add_argument('--consumer', action='store_true',
                         default=False, help="Run Kafka consumer example")
     parser.add_argument('--producer', action='store_true',
@@ -29,13 +33,15 @@ def main():
     args = parser.parse_args()
     validate_args(args)
 
-    kwargs = {
-        k: v for k, v in vars(args).items() if k not in ("producer", "consumer")
-    }
-
     if args.producer:
+        kwargs = {
+            k: v for k, v in vars(args).items() if k not in ("producer", "consumer", "db_uri")
+        }
         producer_example(**kwargs)
     elif args.consumer:
+        kwargs = {
+            k: v for k, v in vars(args).items() if k not in ("producer", "consumer", "checked_url")
+        }
         consumer_example(**kwargs)
 
 
@@ -51,6 +57,10 @@ def validate_args(args):
         fail("--producer and --consumer are mutually exclusive")
     elif not args.producer and not args.consumer:
         fail("--producer or --consumer are required")
+    elif args.producer and args.checked_url is None:
+        fail("--producer needs --checked-url to be set")
+    elif args.consumer and args.db_uri is None:
+        fail("--consumer needs --db-uri to be set")
 
 
 def fail(message):
