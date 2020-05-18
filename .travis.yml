@@ -18,9 +18,10 @@ script: tox
 # following command to finish PyPI deployment setup:
 # $ travis encrypt --add deploy.password
 deploy:
-  provider: testpypi
+  provider: pypi
   distributions: sdist bdist_wheel
   user: fieryjoy
+  server: https://testpypi.python.org/pypi 
   password:
     secure: 3pjK48ZtdHDwrTs
   on:
