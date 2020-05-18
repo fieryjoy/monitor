@@ -2,6 +2,7 @@ from kafka import KafkaConsumer
 import json
 
 from monitor.database import create_table, insert_values
+from monitor.logging import logger
 
 
 def consumer_example(service_uri, ca_path, cert_path, key_path, db_uri):
@@ -30,7 +31,7 @@ def consumer_example(service_uri, ca_path, cert_path, key_path, db_uri):
     for tp, msgs in raw_msgs.items():
         for msg in msgs:
             value = msg.value
-            print("Received: {}".format(value))
+            logger.info("Received: {}".format(value))
             values.append(value)
 
     if values:

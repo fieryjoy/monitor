@@ -1,17 +1,9 @@
 from kafka import KafkaProducer
 import json
-import requests
 import time
 
-
-def get_result(url):
-    response = requests.get(url)
-
-    return {
-        'status_code': response.status_code,
-        'reason': response.reason,
-        'response_time': response.elapsed.total_seconds(),
-        }
+from monitor.results import get_result
+from monitor.logging import logger
 
 
 def producer_example(service_uri, ca_path, cert_path, key_path, checked_url):
@@ -26,7 +18,7 @@ def producer_example(service_uri, ca_path, cert_path, key_path, checked_url):
 
     while True:
         result = get_result(checked_url)
-        print("Sending: {}".format(result))
+        logger.info("Sending: {}".format(result))
         producer.send("python_example_topic", result)
 
         # Wait for all messages to be sent
