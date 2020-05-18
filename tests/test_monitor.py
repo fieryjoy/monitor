@@ -8,6 +8,7 @@ from unittest import mock
 import datetime
 
 from monitor import consumer_example, producer_example
+from monitor.database import prepare_command
 
 
 # This method will be used by the mock to replace requests.get
@@ -59,3 +60,11 @@ class TestMonitor(unittest.TestCase):
         result = producer_example.get_result('http://someotherurl.com')
         self.assertEqual(result['status_code'], 400)
         self.assertEqual(result['reason'], 'Bad Request')
+
+    def test_003_prepare_command(self):
+        """Tests command and values for insert in DB"""
+        values = [{'status_code': 200, 'reason': 'ok', 'response_time': 333}]
+        command, values = prepare_command(values)
+        x = "INSERT INTO stats (status_code', reason, response_time) VALUES %s"
+        self.assertEqual(command, x)
+        self.assertEqual(values, [(200, 'ok', 333)])

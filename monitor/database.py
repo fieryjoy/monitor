@@ -19,15 +19,22 @@ def create_table(db_uri):
             cur.execute(command)
 
 
-def insert_values(db_uri, values):
-    """ insert values in the stats table"""
+def prepare_command(values):
+    """ prepare the received values and command for table insert """
     values = [
         (value['status_code'], value['reason'], value['response_time'])
         for value in values]
 
     value_records = ", ".join(["%s"] * len(values))
-    keys = "(status_code, reason, response_time)"
-    command = "INSERT INTO stats {} VALUES {}".format(keys, value_records)
+    keys = "status_code', reason, response_time"
+    command = "INSERT INTO stats ({}) VALUES {}".format(keys, value_records)
+
+    return command, values
+
+
+def insert_values(db_uri, values):
+    """ insert values in the stats table"""
+    command, values = prepare_command(values)
 
     with psycopg2.connect(db_uri) as conn:
         with conn.cursor() as cur:
