@@ -16,3 +16,13 @@ History
 ------------------
 
 * Third release on TestPyPI.
+
+0.1.3 (2020-05-18)
+------------------
+
+* Forth release on TestPyPI.
+
+0.1.4 (2020-05-18)
+------------------
+
+* Fifth release on TestPyPI.

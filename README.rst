@@ -4,7 +4,7 @@ monitor
 
 
 .. image:: https://img.shields.io/pypi/v/monitor.svg
-        :target: https://test.pypi.org/project/monitor/0.1.2/
+        :target: https://test.pypi.org/project/monitor/0.1.4/
 
 .. image:: https://img.shields.io/travis/fieryjoy/monitor.svg
         :target: https://travis-ci.com/fieryjoy/monitor
@@ -16,7 +16,9 @@ monitor
 
 
 
-Python Boilerplate contains all the boilerplate you need to create a Python package.
+Very basic site monitoring system based on kafka and postgresql.
+The producer checks periodically the status of the site and retrieves some statistics that are put on a kafka topic.
+The consumer reads statistics from the topic and stores them in a postgresql database.
 
 
 * Free software: MIT license
