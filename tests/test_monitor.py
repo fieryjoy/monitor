@@ -65,6 +65,6 @@ class TestMonitor(unittest.TestCase):
         """Tests command and values for insert in DB"""
         values = [{'status_code': 200, 'reason': 'ok', 'response_time': 333}]
         command, values = prepare_command(values)
-        x = "INSERT INTO stats (status_code', reason, response_time) VALUES %s"
+        x = "INSERT INTO stats (status_code, reason, response_time) VALUES %s"
         self.assertEqual(command, x)
         self.assertEqual(values, [(200, 'ok', 333)])

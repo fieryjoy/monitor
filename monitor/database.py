@@ -26,7 +26,7 @@ def prepare_command(values):
         for value in values]
 
     value_records = ", ".join(["%s"] * len(values))
-    keys = "status_code', reason, response_time"
+    keys = "status_code, reason, response_time"
     command = "INSERT INTO stats ({}) VALUES {}".format(keys, value_records)
 
     return command, values
