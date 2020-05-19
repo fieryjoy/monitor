@@ -52,3 +52,8 @@ History
 ------------------
 
 * Tenth release on TestPyPI.
+
+0.1.10 (2020-05-19)
+------------------
+
+* Eleventh release on TestPyPI.
