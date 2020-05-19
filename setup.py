@@ -36,7 +36,7 @@ setup(
         'Programming Language :: Python :: 3.8',
     ],
     description="Python Boilerplate contains all the boilerplate you need to create a Python package.",
-    scripts=['bin/cli.py'],
+    scripts=['bin/cli.py', 'bin/monitor_consumer.sh', 'bin/monitor_producer.sh'],
     install_requires=requirements,
     license="MIT license",
     long_description=readme + '\n\n' + history,

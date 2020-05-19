@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Main module.""
+"""Main module."""
 
 import argparse
 import os
