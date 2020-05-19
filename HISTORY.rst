@@ -36,3 +36,8 @@ History
 ------------------
 
 * Seventh release on TestPyPI.
+
+0.1.7 (2020-05-19)
+------------------
+
+* Eighth release on TestPyPI.
