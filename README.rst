@@ -4,7 +4,7 @@ monitor
 
 
 .. image:: https://img.shields.io/pypi/v/monitor.svg
-        :target: https://test.pypi.org/project/monitor/0.1.5/
+        :target: https://test.pypi.org/project/monitor/0.1.6/
 
 .. image:: https://img.shields.io/travis/fieryjoy/monitor.svg
         :target: https://travis-ci.com/fieryjoy/monitor

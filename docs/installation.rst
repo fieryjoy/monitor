@@ -12,7 +12,7 @@ To install monitor, run this command in your terminal:
 
 .. code-block:: console
 
-    $ pip install -i https://test.pypi.org/simple/ monitor==0.1.5
+    $ pip install -i https://test.pypi.org/simple/ monitor==0.1.6
 
 This is the preferred method to install monitor, as it will always install the most recent stable release.
 
